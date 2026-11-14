@@ -63,9 +63,11 @@ for e in raw['elements']:
     if any(metres(lat, lng, a, b) < 80 for a, b in kept.get(key, [])): continue  # same place mapped twice
     kept.setdefault(key, []).append((lat, lng))
     c = cat(t)
-    items.append([n, t['name'] if t['name'] != n else '', round(lat, 5), round(lng, 5), c, kind(t, c), score(t), t.get('opening_hours', '')[:60]])
+    wiki = t.get('wikidata') or t.get('wikipedia', '')
+    desc = (t.get('description:zh') or t.get('description:en') or t.get('description') or '')[:200]
+    items.append([n, t['name'] if t['name'] != n else '', round(lat, 5), round(lng, 5), c, kind(t, c), score(t), t.get('opening_hours', '')[:60], wiki, desc, t.get('cuisine', '')[:40]])
 
 out = {'source': '© OpenStreetMap contributors (ODbL)', 'built': datetime.date.today().isoformat(), 'bbox': BBOX,
-       'fields': ['name', 'local', 'lat', 'lng', 'cat', 'kind', 'score', 'hours'], 'items': items}
+       'fields': ['name', 'local', 'lat', 'lng', 'cat', 'kind', 'score', 'hours', 'wiki', 'desc', 'cuisine'], 'items': items}
 json.dump(out, open(sys.argv[2], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print(len(items), 'places')
