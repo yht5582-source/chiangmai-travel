@@ -1,0 +1,11 @@
+{
+  "name": "清邁慢旅｜2026 旅行手帳",
+  "short_name": "清邁慢旅",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f3eb",
+  "theme_color": "#274e43",
+  "lang": "zh-Hant",
+  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}
