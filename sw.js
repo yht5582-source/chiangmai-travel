@@ -1,5 +1,5 @@
 // Offline copy of the itinerary page. Network first, so updates appear when online.
-const CACHE='cm-trip-v3';
+const CACHE='cm-trip-v4';
 const SHELL=['./','./index.html','./manifest.webmanifest','./icon.svg','./nearby.json'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
